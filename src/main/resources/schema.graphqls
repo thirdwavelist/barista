@@ -1,9 +1,9 @@
 type Query {
-    cafe(id: ID): [Cafe]!
+    cafe: [Cafe!]!
 }
 
 type Cafe {
-    id: ID!
+    id: String!
     name: String!
     location: Location!
     thumbnailUrl: String
@@ -20,7 +20,7 @@ type Location {
     zipCode: Int
     country: String!
     lat: Float
-    long: Float
+    lng: Float
 }
 
 type SocialInfo {
@@ -32,7 +32,7 @@ type SocialInfo {
 }
 
 type GearInfo {
-    espressoMachine: [Machine]
+    espresso: [Machine]
     grinder: [Machine]
     immersive: [Machine]
     pourover: [Machine]
@@ -50,7 +50,7 @@ type Menu {
 type BeanInfo {
     roaster: Roaster
     roastLevel: RoastLevel
-    origin: OriginType
+    originType: OriginType
 }
 
 enum OriginType {

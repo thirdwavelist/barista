@@ -1,9 +1,7 @@
 package com.thirdwavelist.barista.model;
 
-import java.util.UUID;
-
 public class Cafe {
-    private UUID guid;
+    private String id;
     private String name;
     private Location location;
     private String thumbnailUrl;
@@ -13,8 +11,8 @@ public class Cafe {
     private BeanInfo bean;
     private Menu prices;
 
-    public Cafe(UUID guid, String name, Location location, String thumbnailUrl, SocialInfo social, BrewMethod[] brewMethods, GearInfo gear, BeanInfo bean, Menu prices) {
-        this.guid = guid;
+    public Cafe(String id, String name, Location location, String thumbnailUrl, SocialInfo social, BrewMethod[] brewMethods, GearInfo gear, BeanInfo bean, Menu prices) {
+        this.id = id;
         this.name = name;
         this.location = location;
         this.thumbnailUrl = thumbnailUrl;
@@ -25,12 +23,8 @@ public class Cafe {
         this.prices = prices;
     }
 
-    Cafe(String name, Location location, String thumbnailUrl, SocialInfo social, BrewMethod[] brewMethods, GearInfo gear, BeanInfo bean, Menu prices) {
-        new Cafe(UUID.randomUUID(), name, location, thumbnailUrl, social, brewMethods, gear, bean, prices);
-    }
-
-    public UUID getGuid() {
-        return guid;
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -63,5 +57,41 @@ public class Cafe {
 
     public Menu getPrices() {
         return prices;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public void setSocial(SocialInfo social) {
+        this.social = social;
+    }
+
+    public void setBrewMethods(BrewMethod[] brewMethods) {
+        this.brewMethods = brewMethods;
+    }
+
+    public void setGear(GearInfo gear) {
+        this.gear = gear;
+    }
+
+    public void setBean(BeanInfo bean) {
+        this.bean = bean;
+    }
+
+    public void setPrices(Menu prices) {
+        this.prices = prices;
     }
 }

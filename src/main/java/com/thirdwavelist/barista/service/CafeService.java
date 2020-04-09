@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -21,11 +20,11 @@ public class CafeService {
         return Collections.unmodifiableCollection(cafe);
     }
 
-    public Collection<Cafe> getCafe(UUID guid) {
+    public Collection<Cafe> getCafe(String uid) {
         return Collections.unmodifiableCollection(cafe).stream().filter(new Predicate<Cafe>() {
             @Override
             public boolean test(Cafe cafe) {
-                return cafe.getGuid().equals(guid);
+                return cafe.getId().equals(uid);
             }
         }).collect(Collectors.toUnmodifiableList());
     }
