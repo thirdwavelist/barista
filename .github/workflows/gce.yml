@@ -23,7 +23,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: api-cluster
-  GKE_ZONE: eu-west1-b
+  GKE_ZONE: europe-west1-b
   IMAGE: barista-gke
 
 jobs:
