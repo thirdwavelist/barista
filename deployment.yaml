@@ -6,7 +6,6 @@ metadata:
     app: barista
 spec:
   progressDeadlineSeconds: 120
-  minReadySeconds: 5
   selector:
     matchLabels:
       app: barista
@@ -23,7 +22,7 @@ spec:
     spec:
       containers:
         - name: barista-gke
-          image: eu.gcr.io/PROJECT_ID/IMAGE:TAG
+          image: gcr.io/PROJECT_ID/IMAGE:TAG
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
