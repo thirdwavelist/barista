@@ -1,31 +1,21 @@
 package com.thirdwavelist.barista.service;
 
-import com.thirdwavelist.barista.model.Cafe;
+import com.thirdwavelist.barista.entity.Cafe;
+import com.thirdwavelist.barista.repository.CafeRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @Service
 public class CafeService {
-    private final Collection<Cafe> cafe = new ConcurrentLinkedQueue<>();
+    private final CafeRepository cafeRepository;
 
-    public CafeService() {
+    public CafeService(CafeRepository cafeRepository) {
+        this.cafeRepository = cafeRepository;
     }
 
-    public Collection<Cafe> getCafe() {
-        return Collections.unmodifiableCollection(cafe);
-    }
-
-    public Collection<Cafe> getCafe(String uid) {
-        return Collections.unmodifiableCollection(cafe).stream().filter(new Predicate<Cafe>() {
-            @Override
-            public boolean test(Cafe cafe) {
-                return cafe.getId().equals(uid);
-            }
-        }).collect(Collectors.toUnmodifiableList());
+    public Cafe getCafe(String id) {
+        return cafeRepository.findById(id).map(it ->
+                new Cafe(it.getId(),
+                        it.getName())
+        ).block();
     }
 }

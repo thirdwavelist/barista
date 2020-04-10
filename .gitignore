@@ -30,3 +30,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Other ###
+firebase-debug.log

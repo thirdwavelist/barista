@@ -1,86 +1,8 @@
 type Query {
-    cafe: [Cafe!]!
+    cafe(id: String!): Cafe
 }
 
 type Cafe {
     id: String!
     name: String!
-    location: Location!
-    thumbnailUrl: String
-    social: SocialInfo
-    brewMethods: [BrewMethod]
-    gear: GearInfo
-    bean: BeanInfo
-    prices: Menu
-}
-
-type Location {
-    address: String!
-    city: String!
-    zipCode: Int
-    country: String!
-    lat: Float
-    lng: Float
-}
-
-type SocialInfo {
-    url: String
-    facebookUrl: String
-    instagramUrl: String
-    googlePlaceId: String
-    instagramLocationId: String
-}
-
-type GearInfo {
-    espresso: [Machine]
-    grinder: [Machine]
-    immersive: [Machine]
-    pourover: [Machine]
-}
-
-type Machine {
-    name: String
-}
-
-type Menu {
-    doppio: Float
-    currency: Currency!
-}
-
-type BeanInfo {
-    roaster: Roaster
-    roastLevel: RoastLevel
-    originType: OriginType
-}
-
-enum OriginType {
-    SINGLE
-    BLEND
-}
-
-type Roaster {
-    name: String!
-    location: Location
-}
-
-enum RoastLevel {
-    LIGHT
-    MEDIUM
-    DARK
-}
-
-enum Currency {
-    HUF
-    USD
-    EUR
-    GBP
-}
-
-enum BrewMethod {
-    ESPRESSO
-    AEROPRESS
-    POUROVER
-    COLDBREW
-    SYPHON
-    FULLIMMERSION
 }
