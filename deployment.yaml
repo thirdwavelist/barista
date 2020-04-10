@@ -16,23 +16,10 @@ spec:
     spec:
       containers:
         - name: barista-gke
-          image: eu.gcr.io/coficiando/barista-gke:latest
+          image: eu.gcr.io/PROJECT_ID/IMAGE:TAG
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-          env:
-            - name: message
-              valueFrom:
-                configMapKeyRef:
-                  name: message-config
-                  key: message
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: message-config
-data:
-  message: Hello World from GKE!
 ---
 apiVersion: v1
 kind: Service
