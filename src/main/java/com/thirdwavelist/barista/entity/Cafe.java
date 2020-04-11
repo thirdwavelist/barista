@@ -1,8 +1,14 @@
 package com.thirdwavelist.barista.entity;
 
+import com.google.cloud.firestore.annotation.DocumentId;
+
 public class Cafe {
+    @DocumentId
     private String id;
     private String name;
+
+    public Cafe() {
+    }
 
     public Cafe(String id, String name) {
         this.id = id;

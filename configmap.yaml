@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: firebase-service-account-cm
+  name: firebase-service-account
 data:
   firebase-service-account.json: |
     {

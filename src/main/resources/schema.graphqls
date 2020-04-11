@@ -1,5 +1,5 @@
 type Query {
-    cafe(id: String!): Cafe
+    cafe(id: String): [Cafe]!
 }
 
 type Cafe {

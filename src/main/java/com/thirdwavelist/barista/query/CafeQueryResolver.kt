@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service
 
 @Service
 class CafeQueryResolver(private val cafeService: CafeService) : GraphQLQueryResolver {
-    fun cafe(id: String): Cafe {
+    fun cafe(): Collection<Cafe> {
+        return cafeService.all
+    }
+
+    fun cafe(id: String): Collection<Cafe> {
         return cafeService.getCafe(id)
     }
 }
