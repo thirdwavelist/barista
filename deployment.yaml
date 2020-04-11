@@ -27,6 +27,11 @@ spec:
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: "/app/firebase-service-account.json"
+            - name: FIREBASE_PROJECT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: firebaseProjectId
           ports:
             - containerPort: 8080
           volumeMounts:

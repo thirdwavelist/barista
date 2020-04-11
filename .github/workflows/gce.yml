@@ -75,6 +75,7 @@ jobs:
     - name: Set up secrets
       run: |-
         kubectl create secret generic firebase-service-account --from-file=$FIREBASE_SERVICE_ACCOUNT
+        kubectl create configmap app-config --from-literal=firebaseProjectId=$FIREBASE_PROJECT_ID
       # Set up kustomize
     - name: Set up Kustomize
       run: |-
