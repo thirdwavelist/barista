@@ -79,8 +79,8 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        ./kustomize edit add secret firebase-service-account --from-file=$FIREBASE_SERVICE_ACCOUNT
-        ./kustomize edit add configmap app-config --from-literal=firebaseProjectId=$FIREBASE_PROJECT_ID
+        ./kustomize edit add configmap app-config --from-literal firebaseProjectId=$FIREBASE_PROJECT_ID
+        ./kustomize edit add secret firebase-service-account --from-file $FIREBASE_SERVICE_ACCOUNT
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$IMAGE
