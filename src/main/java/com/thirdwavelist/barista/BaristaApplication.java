@@ -11,6 +11,7 @@ public class BaristaApplication {
 
 	private static final String[] requiredEnvVariables = {
 			"GOOGLE_APPLICATION_CREDENTIALS",
+			"FIREBASE_PROJECT_ID",
 	};
 
 	public static void main(String[] args) {
