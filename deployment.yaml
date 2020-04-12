@@ -40,5 +40,5 @@ spec:
               subPath: firebase-service-account.json
       volumes:
         - name: config-volume
-          configMap:
-            name: firebase-service-account
+          secret:
+            secretName: firebase-service-account
