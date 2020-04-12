@@ -33,16 +33,12 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
-    # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
         version: '286.0.0'
         service_account_email: ${{ secrets.GKE_SA_EMAIL }}
         service_account_key: ${{ secrets.GKE_SA_KEY }}
         project_id: ${{ secrets.GKE_PROJECT }}
-
-    # Setup Java 11 to create bootJar
     - name: Set up JDK 11
       uses: actions/setup-java@v1
       with:
@@ -51,41 +47,31 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew assemble
-
-    # Configure Docker to use the gcloud command-line tool as a credential
-    # helper for authentication
     - run: |-
         gcloud --quiet auth configure-docker
-    # Get the GKE credentials so we can deploy to the cluster
     - run: |-
         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
-    # Build the Docker image
     - name: Build
       run: |-
         docker build \
           --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
           --build-arg JAR_FILE="build/libs/*.jar" \
           .
-    # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
         docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
-    # Set yq
     - name: Set up yq
       run: |-
         curl -sfLo yq https://github.com/mikefarah/yq/releases/download/3.2.1/yq_linux_amd64
         chmod u+x ./yq
-    # Run templating
     - name: Run templating
       run: |-
         ./yq w secret.yaml 'data."firebase-service-account.json"' "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" -i
         ./yq w configmap.yaml "data.firebaseProjectId" "${{ secrets.FIREBASE_PROJECT_ID }}" -i
-    # Set up kustomize
     - name: Set up Kustomize
       run: |-
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
-    # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA

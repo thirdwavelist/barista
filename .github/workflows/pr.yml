@@ -15,7 +15,11 @@ jobs:
         java-version: 11
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    - name: Set up secret env vars
+      run: |-
+        export FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
+        export GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
     - name: Build with Gradle
-      run: ./gradlew build -DGOOGLE_APPLICATION_CREDENTIALS=${{ secrets.FIREBASE_SERVICE_ACCOUNT }} -DFIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
+      run: ./gradlew --info build
     - name: Run tests
-      run: ./gradlew test -DGOOGLE_APPLICATION_CREDENTIALS=${{ secrets.FIREBASE_SERVICE_ACCOUNT }} -DFIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
+      run: ./gradlew --info test
