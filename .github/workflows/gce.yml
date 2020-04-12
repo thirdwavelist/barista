@@ -79,8 +79,8 @@ jobs:
     # Run templating
     - name: Run templating
       run: |-
-        yq w secret.yaml "data[0].firebase-service-account.json" "$FIREBASE_SERVICE_ACCOUNT" -i
-        yq w configmap.yaml "data[0].firebaseProjectId" "$FIREBASE_PROJECT_ID" -i
+        ./yq w secret.yaml "data[0].firebase-service-account.json" "$FIREBASE_SERVICE_ACCOUNT" -i
+        ./yq w configmap.yaml "data[0].firebaseProjectId" "$FIREBASE_PROJECT_ID" -i
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
