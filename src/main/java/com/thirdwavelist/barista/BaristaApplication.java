@@ -10,8 +10,8 @@ public class BaristaApplication {
 	private static final Log log = LogFactory.getLog(BaristaApplication.class);
 
 	private static final String[] requiredEnvVariables = {
-			"GOOGLE_APPLICATION_CREDENTIALS",
 			"FIREBASE_PROJECT_ID",
+			"GOOGLE_APPLICATION_CREDENTIALS",
 	};
 
 	public static void main(String[] args) {

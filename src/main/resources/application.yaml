@@ -1,2 +1,0 @@
-firebase:
-  databaseUrl: "https://$FIREBASE_PROJECT_ID.firebaseio.com/"
