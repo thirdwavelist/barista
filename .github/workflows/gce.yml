@@ -71,16 +71,24 @@ jobs:
     - name: Publish
       run: |-
         docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+    # Set yq
+    - name: Set up yq
+      run: |-
+        curl -sfLo yq https://github.com/mikefarah/yq/releases/download/3.2.1/yq_linux_amd64
+        chmod u+x ./yq
+    # Run templating
+    - name: Run templating
+      run: |-
+        yq w secret.yaml "data[0].firebase-service-account.json" "$FIREBASE_SERVICE_ACCOUNT" -i
+        yq w configmap.yaml "data[0].firebaseProjectId" "$FIREBASE_PROJECT_ID" -i
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
-        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv3.5.4/kustomize_v3.5.4_linux_amd64.tar.gz
+        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        ./kustomize edit add configmap app-config --from-literal firebaseProjectId=$FIREBASE_PROJECT_ID
-        ./kustomize edit add secret firebase-service-account --from-file $FIREBASE_SERVICE_ACCOUNT
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$IMAGE
