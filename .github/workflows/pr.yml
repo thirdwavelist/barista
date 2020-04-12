@@ -18,7 +18,7 @@ jobs:
     - name: Run tests
       run: |-
         echo ${{ secrets.FIREBASE_SERVICE_ACCOUNT }} > ./firebase-service-account-encoded.json
-        base64 -d ./firebase-service-account-encoded.json ./firebase-service-account.json
+        base64 -d firebase-service-account-encoded.json firebase-service-account.json
         export FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
         export GOOGLE_APPLICATION_CREDENTIALS="./firebase-service-account.json"
         ./gradlew --info test
