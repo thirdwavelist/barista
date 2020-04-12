@@ -76,11 +76,6 @@ jobs:
       run: |-
         curl -sfLo yq https://github.com/mikefarah/yq/releases/download/3.2.1/yq_linux_amd64
         chmod u+x ./yq
-    # Run templating
-    - name: Run templating
-      run: |-
-        ./yq w secret.yaml "data.firebase-service-account.json" "$FIREBASE_SERVICE_ACCOUNT" -i
-        ./yq w configmap.yaml "data.firebaseProjectId" "$FIREBASE_PROJECT_ID" -i
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
@@ -89,6 +84,8 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
+        ./yq w secret.yaml "data.firebase-service-account.json" "$FIREBASE_SERVICE_ACCOUNT" -i
+        ./yq w configmap.yaml "data.firebaseProjectId" "$FIREBASE_PROJECT_ID" -i
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$IMAGE
