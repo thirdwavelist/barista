@@ -38,9 +38,5 @@ dependencyManagement {
 }
 
 test {
-    doFirst {
-        println System.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-        println System.getenv("FIREBASE_PROJECT_ID")
-    }
     useJUnitPlatform()
 }
