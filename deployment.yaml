@@ -24,5 +24,21 @@ spec:
         - name: barista-gke
           image: gcr.io/PROJECT_ID/IMAGE:TAG
           imagePullPolicy: Always
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: "/app/firebase-service-account.json"
+            - name: FIREBASE_PROJECT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: firebaseProjectId
           ports:
             - containerPort: 8080
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/firebase-service-account.json
+              subPath: firebase-service-account.json
+      volumes:
+        - name: config-volume
+          secret:
+            secretName: firebase-service-account

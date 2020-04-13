@@ -15,7 +15,11 @@ jobs:
         java-version: 11
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
     - name: Run tests
-      run: ./gradlew test
+      run: |-
+        touch ./firebase-service-account.json
+        echo ${{ secrets.FIREBASE_SERVICE_ACCOUNT }} > ./firebase-service-account-encoded.json
+        base64 -d firebase-service-account-encoded.json > firebase-service-account.json
+        export FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
+        export GOOGLE_APPLICATION_CREDENTIALS="./firebase-service-account.json"
+        ./gradlew --info test
