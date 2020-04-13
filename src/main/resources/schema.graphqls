@@ -1,8 +1,25 @@
 type Query {
     cafe(id: String): [Cafe]
+    city(id: String): [City]
 }
 
 type Cafe {
     id: String!
     name: String!
+    address: String!
+    city: City!
+    instagramId: String
+    googlePlaceId: String
+    location: Location!
+}
+
+type City {
+    name: String!
+    countryCode: String!
+    location: Location!
+}
+
+type Location {
+    lat: Float
+    lng: Float
 }

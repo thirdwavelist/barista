@@ -1,33 +1,9 @@
-package com.thirdwavelist.barista.entity;
+package com.thirdwavelist.barista.entity
 
-import com.google.cloud.firestore.annotation.DocumentId;
-
-public class Cafe {
-    @DocumentId
-    private String id;
-    private String name;
-
-    public Cafe() {
-    }
-
-    public Cafe(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-}
+data class Cafe(val id: String,
+           val name: String,
+           val city: City,
+           val address: String,
+           val instagramId: String?,
+           val googlePlaceId: String?,
+           val location: Location)
