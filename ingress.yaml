@@ -1,0 +1,11 @@
+apiVersion: "extensions/v1beta1"
+kind: "Ingress"
+metadata:
+  name: "barista-gke-ingress"
+  namespace: "default"
+  annotations:
+    networking.gke.io/managed-certificates: "barista-gke-ssl"
+spec:
+  backend:
+    serviceName: "barista-gke"
+    servicePort: 80
