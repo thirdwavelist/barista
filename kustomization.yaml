@@ -6,3 +6,4 @@ resources:
 - "configmap.yaml"
 - "secret.yaml"
 - "ingress.yaml"
+- "managedcert.yaml"
