@@ -29,15 +29,15 @@ spec:
               path: "/actuator/health"
               port: 8080
             initialDelaySeconds: 5
-            timeoutSeconds: 10
+            timeoutSeconds: 30
             periodSeconds: 5
             failureThreshold: 3
           livenessProbe:
             httpGet:
               path: "/actuator/health"
               port: 8080
-            initialDelaySeconds: 5
-            timeoutSeconds: 10
+            initialDelaySeconds: 20
+            timeoutSeconds: 30
             periodSeconds: 5
             failureThreshold: 3
           env:
