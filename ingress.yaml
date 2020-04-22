@@ -5,6 +5,7 @@ metadata:
   namespace: "default"
   annotations:
     networking.gke.io/managed-certificates: "barista-gke-ssl"
+    kubernetes.io/ingress.global-static-ip-name: "barista-gke-ingress-static-ip"
 spec:
   backend:
     serviceName: "barista-gke"
