@@ -1,5 +1,6 @@
 package com.thirdwavelist.barista.config
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -7,9 +8,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @EnableWebSecurity
 @Configuration
-open class SecurityConfig: WebSecurityConfigurerAdapter() {
+open class SecurityConfig : WebSecurityConfigurerAdapter() {
+    @Value("\${webSecurity.requireSsl}")
+    private val requireHttps: Boolean = false
+
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        http.requiresChannel().anyRequest().requiresSecure()
+        if (requireHttps) {
+            http.requiresChannel().anyRequest().requiresSecure()
+        }
     }
 }
