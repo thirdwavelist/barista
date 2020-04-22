@@ -6,7 +6,8 @@ metadata:
   annotations:
     networking.gke.io/managed-certificates: "barista-gke-ssl"
     kubernetes.io/ingress.global-static-ip-name: "barista-gke-ingress-static-ip"
+    kubernetes.io/ingress.allow-http: "false"
 spec:
   backend:
     serviceName: "barista-gke"
-    servicePort: 80
+    servicePort: 443
