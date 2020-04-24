@@ -58,7 +58,7 @@ spec:
                     key: "keyPassword"
             - name: "SSL_KEYSTORE_KEY_ALIAS"
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: "app-config"
                   key: "keyAlias"
           ports:
