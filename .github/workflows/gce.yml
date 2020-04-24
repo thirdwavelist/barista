@@ -70,6 +70,9 @@ jobs:
         ./yq w secret.yaml 'data."firebase-service-account.json"' "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" -i
         ./yq w secret.yaml 'data."tls.key"' "${{ secrets.SSL_PRIVATEKEY_PEM }}" -i
         ./yq w secret.yaml 'data."tls.cert"' "${{ secrets.SSL_FULLCHAIN_PEM }}" -i
+        ./yq w secret.yaml 'data."keystore.p12"' "${{ secrets.SSL_KEYSTORE }}" -i
+        ./yq w secret.yaml "data.keyAlias" "${{ secrets.SSL_KEYSTORE_KEY_ALIAS }}" -i
+        ./yq w secret.yaml "data.keyPassword" "${{ secrets.SSL_KEYSTORE_PWD }}" -i
         ./yq w configmap.yaml "data.firebaseProjectId" "${{ secrets.FIREBASE_PROJECT_ID }}" -i
     - name: Set up Kustomize
       run: |-

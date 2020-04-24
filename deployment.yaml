@@ -48,13 +48,31 @@ spec:
                 configMapKeyRef:
                   name: "app-config"
                   key: "firebaseProjectId"
+            - name: "SSL_KEYSTORE"
+              value: "/app/keystore.p12"
+            - name: "SSL_KEYSTORE_PWD"
+              valueFrom:
+                  secretKeyRef:
+                    name: "keystore-aux"
+                    key: "keyPassword"
+            - name: "SSL_KEYSTORE_KEY_ALIAS"
+              valueFrom:
+                secretKeyRef:
+                  name: "keystore-aux"
+                  key: "keyAlias"
           ports:
             - containerPort: 8080
           volumeMounts:
             - name: "config-volume"
               mountPath: "/app/firebase-service-account.json"
               subPath: "firebase-service-account.json"
+            - name: "keystore-volume"
+              mountPath: "/app/keystore.p12"
+              subPath: "keystore.p12"
       volumes:
         - name: "config-volume"
           secret:
             secretName: "firebase-service-account"
+        - name: "keystore-volume"
+          secret:
+            secretName: "keystore"
