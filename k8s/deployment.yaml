@@ -59,7 +59,7 @@ spec:
             - name: "SSL_KEYSTORE_KEY_ALIAS"
               valueFrom:
                 secretKeyRef:
-                  name: "keystore-aux"
+                  name: "app-config"
                   key: "keyAlias"
           ports:
             - containerPort: 8080
