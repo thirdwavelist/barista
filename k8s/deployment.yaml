@@ -6,11 +6,11 @@ metadata:
   labels:
     app: "barista"
 spec:
-  progressDeadlineSeconds: 240
+  progressDeadlineSeconds: 160
   selector:
     matchLabels:
       app: "barista"
-  replicas: 2
+  replicas: 1
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -29,17 +29,17 @@ spec:
             httpGet:
               path: "/actuator/health"
               port: 8443
-            initialDelaySeconds: 5
-            timeoutSeconds: 30
-            periodSeconds: 5
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 10
             failureThreshold: 3
           livenessProbe:
             httpGet:
               path: "/actuator/health"
               port: 8443
-            initialDelaySeconds: 20
-            timeoutSeconds: 30
-            periodSeconds: 5
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 10
             failureThreshold: 3
           env:
             - name: "GOOGLE_APPLICATION_CREDENTIALS"
@@ -62,7 +62,7 @@ spec:
                   name: "app-config"
                   key: "keyAlias"
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           volumeMounts:
             - name: "config-volume"
               mountPath: "/app/firebase-service-account.json"

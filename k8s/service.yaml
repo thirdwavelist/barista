@@ -8,5 +8,5 @@ spec:
   selector:
     app: "barista"
   ports:
-    - port: 443
-      targetPort: 80
+    - port: 80
+      targetPort: 8080
