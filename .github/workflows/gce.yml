@@ -67,13 +67,13 @@ jobs:
         chmod u+x ./yq
     - name: Run templating
       run: |-
-        ./yq w firebase.yaml 'data."firebase-service-account.json"' "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" -i
-        ./yq w sslcert.yaml 'data."tls.key"' "${{ secrets.SSL_PRIVATEKEY_PEM }}" -i
-        ./yq w sslcert.yaml 'data."tls.cert"' "${{ secrets.SSL_FULLCHAIN_PEM }}" -i
-        ./yq w keystore.yaml 'data."keystore.p12"' "${{ secrets.SSL_KEYSTORE_BASE64 }}" -i
-        ./yq w keystore.yaml "data.keyAlias" "${{ secrets.SSL_KEYSTORE_KEY_ALIAS }}" -i
-        ./yq w keystore.yaml "data.keyPassword" "${{ secrets.SSL_KEYSTORE_PWD }}" -i
-        ./yq w configmap.yaml "data.firebaseProjectId" "${{ secrets.FIREBASE_PROJECT_ID }}" -i
+        ./yq w k8s/firebase.yaml 'data."firebase-service-account.json"' "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" -i
+        ./yq w k8s/sslcert.yaml 'data."tls.key"' "${{ secrets.SSL_PRIVATEKEY_PEM }}" -i
+        ./yq w k8s/sslcert.yaml 'data."tls.cert"' "${{ secrets.SSL_FULLCHAIN_PEM }}" -i
+        ./yq w k8s/keystore.yaml 'data."keystore.p12"' "${{ secrets.SSL_KEYSTORE_BASE64 }}" -i
+        ./yq w k8s/keystore.yaml "data.keyAlias" "${{ secrets.SSL_KEYSTORE_KEY_ALIAS }}" -i
+        ./yq w k8s/keystore.yaml "data.keyPassword" "${{ secrets.SSL_KEYSTORE_PWD }}" -i
+        ./yq w k8s/configmap.yaml "data.firebaseProjectId" "${{ secrets.FIREBASE_PROJECT_ID }}" -i
     - name: Set up Kustomize
       run: |-
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
