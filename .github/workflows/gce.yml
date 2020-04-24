@@ -68,6 +68,8 @@ jobs:
     - name: Run templating
       run: |-
         ./yq w secret.yaml 'data."firebase-service-account.json"' "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" -i
+        ./yq w secret.yaml 'data."tls.key"' "${{ secrets.SSL_PRIVATEKEY_PEM }}" -i
+        ./yq w secret.yaml 'data."tls.cert"' "${{ secrets.SSL_FULLCHAIN_PEM }}" -i
         ./yq w configmap.yaml "data.firebaseProjectId" "${{ secrets.FIREBASE_PROJECT_ID }}" -i
     - name: Set up Kustomize
       run: |-
