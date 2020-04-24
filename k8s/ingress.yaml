@@ -10,4 +10,4 @@ spec:
     - secretName: "sslcerts"
   backend:
     serviceName: "barista-gke"
-    servicePort: 80
+    servicePort: 443

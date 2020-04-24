@@ -6,7 +6,7 @@ metadata:
   labels:
     app: "barista"
 spec:
-  progressDeadlineSeconds: 300
+  progressDeadlineSeconds: 240
   selector:
     matchLabels:
       app: "barista"
@@ -28,7 +28,7 @@ spec:
           readinessProbe:
             httpGet:
               path: "/actuator/health"
-              port: 8080
+              port: 8443
             initialDelaySeconds: 5
             timeoutSeconds: 30
             periodSeconds: 5
@@ -36,7 +36,7 @@ spec:
           livenessProbe:
             httpGet:
               path: "/actuator/health"
-              port: 8080
+              port: 8443
             initialDelaySeconds: 20
             timeoutSeconds: 30
             periodSeconds: 5
@@ -62,7 +62,7 @@ spec:
                   name: "app-config"
                   key: "keyAlias"
           ports:
-            - containerPort: 8080
+            - containerPort: 8443
           volumeMounts:
             - name: "config-volume"
               mountPath: "/app/firebase-service-account.json"
