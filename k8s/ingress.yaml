@@ -6,8 +6,8 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "barista-gke-ingress-static-ip"
 spec:
-  tls:
-    - secretName: "sslcerts"
+#  tls:
+#    - secretName: "sslcerts"
   backend:
     serviceName: "barista-gke"
     servicePort: 80
