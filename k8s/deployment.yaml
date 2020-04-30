@@ -6,11 +6,11 @@ metadata:
   labels:
     app: "barista"
 spec:
-  progressDeadlineSeconds: 160
+  progressDeadlineSeconds: 120
   selector:
     matchLabels:
       app: "barista"
-  replicas: 2
+  replicas: 3
   strategy:
     type: "RollingUpdate"
     rollingUpdate:
@@ -30,18 +30,18 @@ spec:
               scheme: "HTTPS"
               path: "/actuator/health"
               port: 8080
-            initialDelaySeconds: 10
-            timeoutSeconds: 10
-            periodSeconds: 10
+            initialDelaySeconds: 3
+            timeoutSeconds: 15
+            periodSeconds: 3
             failureThreshold: 3
           livenessProbe:
             httpGet:
               scheme: "HTTPS"
               path: "/actuator/health"
               port: 8080
-            initialDelaySeconds: 10
-            timeoutSeconds: 10
-            periodSeconds: 10
+            initialDelaySeconds: 3
+            timeoutSeconds: 15
+            periodSeconds: 3
             failureThreshold: 3
           env:
             - name: "GOOGLE_APPLICATION_CREDENTIALS"
