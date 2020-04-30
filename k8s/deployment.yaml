@@ -27,6 +27,7 @@ spec:
           imagePullPolicy: "Always"
           readinessProbe:
             httpGet:
+              scheme: "https"
               path: "/actuator/health"
               port: 8080
             initialDelaySeconds: 0
@@ -35,6 +36,7 @@ spec:
             failureThreshold: 3
           livenessProbe:
             httpGet:
+              scheme: "https"
               path: "/actuator/health"
               port: 8080
             initialDelaySeconds: 0
