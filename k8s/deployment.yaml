@@ -30,7 +30,7 @@ spec:
               scheme: "HTTPS"
               path: "/actuator/health"
               port: 8080
-            initialDelaySeconds: 0
+            initialDelaySeconds: 10
             timeoutSeconds: 10
             periodSeconds: 10
             failureThreshold: 3
@@ -39,7 +39,7 @@ spec:
               scheme: "HTTPS"
               path: "/actuator/health"
               port: 8080
-            initialDelaySeconds: 0
+            initialDelaySeconds: 10
             timeoutSeconds: 10
             periodSeconds: 10
             failureThreshold: 3
