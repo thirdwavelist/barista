@@ -72,6 +72,7 @@ jobs:
         ./yq w k8s/firebase.yaml 'data."firebase-service-account.json"' "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" -i
         ./yq w k8s/sslcert.yaml 'data."tls.key"' "${{ secrets.SSL_PRIVATEKEY_PEM }}" -i
         ./yq w k8s/sslcert.yaml 'data."tls.crt"' "${{ secrets.SSL_FULLCHAIN_PEM }}" -i
+        ./yq w k8s/keystore.yaml 'data."keystore.p12"' "${{ secrets.SSL_KEYSTORE_BASE64 }}" -i
         ./yq w k8s/keystore-aux.yaml "data.keyPassword" "${{ secrets.SSL_KEYSTORE_PWD }}" -i
     - name: Set up Kustomize
       run: |-

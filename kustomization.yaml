@@ -4,7 +4,7 @@ resources:
 - "k8s/deployment.yaml"
 - "k8s/service.yaml"
 - "k8s/configmap.yaml"
-#- "k8s/keystore.yaml"
+- "k8s/keystore.yaml"
 - "k8s/keystore-aux.yaml"
 - "k8s/firebase.yaml"
 - "k8s/sslcert.yaml"
