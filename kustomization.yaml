@@ -7,5 +7,5 @@ resources:
 #- "k8s/keystore.yaml"
 - "k8s/keystore-aux.yaml"
 - "k8s/firebase.yaml"
-- "k8s/sslcert.yaml"
+#- "k8s/sslcert.yaml"
 - "k8s/ingress.yaml"
