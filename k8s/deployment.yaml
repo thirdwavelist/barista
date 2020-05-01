@@ -64,10 +64,10 @@ spec:
               mountPath: "/app/firebase-service-account.json"
               subPath: "firebase-service-account.json"
               readOnly: true
-            - name: "keystore-volume"
-              mountPath: "/app/keystore.p12"
-              subPath: "keystore.p12"
-              readOnly: true
+#            - name: "keystore-volume"
+#              mountPath: "/app/keystore.p12"
+#              subPath: "keystore.p12"
+#              readOnly: true
       volumes:
         - name: "firebase-volume"
           secret:
