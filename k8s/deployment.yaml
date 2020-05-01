@@ -65,18 +65,20 @@ spec:
           ports:
             - containerPort: 8080
           volumeMounts:
-            - name: "firebase-volume"
+            - name: "app-secrets"
               mountPath: "/app"
-              subPath: "firebase-service-account.json"
-              readOnly: true
-            - name: "keystore-volume"
-              mountPath: "/app"
-              subPath: "keystore.p12"
               readOnly: true
       volumes:
-        - name: "firebase-volume"
-          secret:
-            secretName: "firebase-service-account"
-        - name: "keystore-volume"
-          secret:
-            secretName: "keystore"
+        - name: "app-secrets"
+          projected:
+            sources:
+              - secret:
+                  name: "firebase-service-account"
+                  items:
+                    - key: "firebase-service-account"
+                      path: "firebase-service-account.json"
+              - secret:
+                  name: "keystore"
+                  items:
+                    - key: "keystore"
+                      path: "keystore.p12"
