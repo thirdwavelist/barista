@@ -10,6 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 open class SecurityConfig : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        http.requiresChannel().anyRequest().requiresSecure()
+//        http.requiresChannel().anyRequest().requiresSecure()
     }
 }
