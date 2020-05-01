@@ -72,6 +72,6 @@ spec:
         - name: "firebase-volume"
           secret:
             secretName: "firebase-service-account"
-        - name: "keystore-volume"
-          secret:
-            secretName: "keystore"
+#        - name: "keystore-volume"
+#          secret:
+#            secretName: "keystore"
