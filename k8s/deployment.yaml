@@ -66,11 +66,11 @@ spec:
             - containerPort: 8080
           volumeMounts:
             - name: "firebase-volume"
-              mountPath: "/app/firebase-service-account.json"
+              mountPath: "/app"
               subPath: "firebase-service-account.json"
               readOnly: true
             - name: "keystore-volume"
-              mountPath: "/app/keystore.p12"
+              mountPath: "/app"
               subPath: "keystore.p12"
               readOnly: true
       volumes:
