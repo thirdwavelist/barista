@@ -18,7 +18,7 @@ public class BaristaApplication {
 	};
 
 	public static void main(String[] args) {
-//		checkRequiredEnvVars();
+		checkRequiredEnvVars();
 		SpringApplication.run(BaristaApplication.class, args);
 	}
 
