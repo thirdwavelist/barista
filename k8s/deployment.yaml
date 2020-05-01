@@ -27,17 +27,17 @@ spec:
           imagePullPolicy: "Always"
           readinessProbe:
             httpGet:
-              scheme: HTTPS
+              scheme: HTTP
               path: "/actuator/health"
               port: 8080
-            initialDelaySeconds: 3
+            initialDelaySeconds: 10
             timeoutSeconds: 15
             periodSeconds: 3
-          livenessProbe:
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 5
+#          livenessProbe:
+#            tcpSocket:
+#              port: 8080
+#            initialDelaySeconds: 5
+#            periodSeconds: 5
           env:
             - name: "GOOGLE_APPLICATION_CREDENTIALS"
               value: "/app/firebase-service-account.json"
