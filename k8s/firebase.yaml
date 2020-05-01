@@ -1,0 +1,8 @@
+apiVersion: "v1"
+kind: "Secret"
+type: "Opaque"
+metadata:
+  name: "firebase-service-account"
+  namespace: "default"
+data:
+  firebase-service-account.json: ""

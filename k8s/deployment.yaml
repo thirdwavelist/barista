@@ -1,0 +1,84 @@
+apiVersion: "apps/v1beta1"
+kind: "Deployment"
+metadata:
+  name: "barista-gke"
+  labels:
+    app: "barista"
+spec:
+  progressDeadlineSeconds: 120
+  selector:
+    matchLabels:
+      app: "barista"
+  replicas: 3
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  minReadySeconds: 15
+  template:
+    metadata:
+      labels:
+        app: "barista"
+    spec:
+      containers:
+        - name: "barista-gke"
+          image: "gcr.io/PROJECT_ID/IMAGE:TAG"
+          imagePullPolicy: "Always"
+          readinessProbe:
+            httpGet:
+              scheme: "HTTPS"
+              path: "/actuator/health"
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 3
+          livenessProbe:
+            httpGet:
+              scheme: "HTTPS"
+              path: "/actuator/health"
+              port: 8080
+            initialDelaySeconds: 20
+            timeoutSeconds: 30
+            periodSeconds: 5
+            failureThreshold: 3
+          env:
+            - name: "GOOGLE_APPLICATION_CREDENTIALS"
+              value: "/app/firebase-service-account.json"
+            - name: "FIREBASE_PROJECT_ID"
+              valueFrom:
+                configMapKeyRef:
+                  name: "app-config"
+                  key: "firebaseProjectId"
+            - name: "SSL_KEYSTORE"
+              value: "/app/keystore.p12"
+            - name: "SSL_KEYSTORE_PWD"
+              valueFrom:
+                  secretKeyRef:
+                    name: "keystore-aux"
+                    key: "keyPassword"
+            - name: "SSL_KEYSTORE_KEY_ALIAS"
+              valueFrom:
+                configMapKeyRef:
+                  name: "app-config"
+                  key: "keyAlias"
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: "app-secrets"
+              mountPath: "/app"
+              readOnly: true
+      volumes:
+        - name: "app-secrets"
+          projected:
+            sources:
+              - secret:
+                  name: "firebase-service-account"
+                  items:
+                    - key: "firebase-service-account.json"
+                      path: "firebase-service-account.json"
+              - secret:
+                  name: "keystore"
+                  items:
+                    - key: "keystore.p12"
+                      path: "keystore.p12"
