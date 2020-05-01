@@ -28,13 +28,13 @@ spec:
             httpGet:
               path: "/actuator/health"
               port: 8080
-            initialDelaySeconds: 10
+            initialDelaySeconds: 30
             timeoutSeconds: 15
             periodSeconds: 3
           livenessProbe:
             tcpSocket:
               port: 8080
-            initialDelaySeconds: 5
+            initialDelaySeconds: 30
             periodSeconds: 5
           env:
             - name: "GOOGLE_APPLICATION_CREDENTIALS"
