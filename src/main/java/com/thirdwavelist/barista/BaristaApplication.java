@@ -11,8 +11,8 @@ public class BaristaApplication {
 
 	private static final String[] requiredEnvVariables = {
 //			"SSL_KEYSTORE",
-			"SSL_KEYSTORE_PWD",
-			"SSL_KEYSTORE_KEY_ALIAS",
+//			"SSL_KEYSTORE_PWD",
+//			"SSL_KEYSTORE_KEY_ALIAS",
 			"FIREBASE_PROJECT_ID",
 			"GOOGLE_APPLICATION_CREDENTIALS",
 	};
