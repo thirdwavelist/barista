@@ -2,7 +2,6 @@ apiVersion: "apps/v1beta1"
 kind: "Deployment"
 metadata:
   name: "barista-gke"
-  namespace: "default"
   labels:
     app: "barista"
 spec:
@@ -27,17 +26,16 @@ spec:
           imagePullPolicy: "Always"
           readinessProbe:
             httpGet:
-              scheme: HTTP
               path: "/actuator/health"
               port: 8080
             initialDelaySeconds: 10
             timeoutSeconds: 15
             periodSeconds: 3
-#          livenessProbe:
-#            tcpSocket:
-#              port: 8080
-#            initialDelaySeconds: 5
-#            periodSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
           env:
             - name: "GOOGLE_APPLICATION_CREDENTIALS"
               value: "/app/firebase-service-account.json"
