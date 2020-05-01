@@ -10,7 +10,7 @@ public class BaristaApplication {
 	private static final Log log = LogFactory.getLog(BaristaApplication.class);
 
 	private static final String[] requiredEnvVariables = {
-			"SSL_KEYSTORE",
+//			"SSL_KEYSTORE",
 			"SSL_KEYSTORE_PWD",
 			"SSL_KEYSTORE_KEY_ALIAS",
 			"FIREBASE_PROJECT_ID",
