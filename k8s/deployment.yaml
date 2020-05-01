@@ -25,21 +25,23 @@ spec:
         - name: "barista-gke"
           image: "gcr.io/PROJECT_ID/IMAGE:TAG"
           imagePullPolicy: "Always"
-#          readinessProbe:
-#            httpGet:
-#              path: "/actuator/health"
-#              port: 8080
-#            initialDelaySeconds: 30
-#            timeoutSeconds: 15
-#            periodSeconds: 3
-#          livenessProbe:
-#            httpGet:
-#              path: "/actuator/health"
-#              port: 8080
-#            initialDelaySeconds: 20
-#            timeoutSeconds: 30
-#            periodSeconds: 5
-#            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              scheme: "HTTPS"
+              path: "/actuator/health"
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 3
+          livenessProbe:
+            httpGet:
+              scheme: "HTTPS"
+              path: "/actuator/health"
+              port: 8080
+            initialDelaySeconds: 20
+            timeoutSeconds: 30
+            periodSeconds: 5
+            failureThreshold: 3
           env:
             - name: "GOOGLE_APPLICATION_CREDENTIALS"
               value: "/app/firebase-service-account.json"
