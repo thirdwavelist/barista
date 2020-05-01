@@ -3,7 +3,7 @@ kind: "Service"
 metadata:
   name: "barista-gke"
 spec:
-  type: "NodePort"
+  type: "LoadBalancer"
   selector:
     app: "barista"
   ports:
