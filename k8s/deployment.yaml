@@ -36,26 +36,26 @@ spec:
               port: 8080
             initialDelaySeconds: 30
             periodSeconds: 5
-#          env:
-#            - name: "GOOGLE_APPLICATION_CREDENTIALS"
-#              value: "/app/firebase-service-account.json"
-#            - name: "FIREBASE_PROJECT_ID"
-#              valueFrom:
-#                configMapKeyRef:
-#                  name: "app-config"
-#                  key: "firebaseProjectId"
-#            - name: "SSL_KEYSTORE"
-#              value: "/app/keystore.p12"
-#            - name: "SSL_KEYSTORE_PWD"
-#              valueFrom:
-#                  secretKeyRef:
-#                    name: "keystore-aux"
-#                    key: "keyPassword"
-#            - name: "SSL_KEYSTORE_KEY_ALIAS"
-#              valueFrom:
-#                configMapKeyRef:
-#                  name: "app-config"
-#                  key: "keyAlias"
+          env:
+            - name: "GOOGLE_APPLICATION_CREDENTIALS"
+              value: "/app/firebase-service-account.json"
+            - name: "FIREBASE_PROJECT_ID"
+              valueFrom:
+                configMapKeyRef:
+                  name: "app-config"
+                  key: "firebaseProjectId"
+            - name: "SSL_KEYSTORE"
+              value: "/app/keystore.p12"
+            - name: "SSL_KEYSTORE_PWD"
+              valueFrom:
+                  secretKeyRef:
+                    name: "keystore-aux"
+                    key: "keyPassword"
+            - name: "SSL_KEYSTORE_KEY_ALIAS"
+              valueFrom:
+                configMapKeyRef:
+                  name: "app-config"
+                  key: "keyAlias"
           ports:
             - containerPort: 8080
           volumeMounts:
